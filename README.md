@@ -1,5 +1,5 @@
-# webpack-basic
-Basic setup of webpack for starting any type of project with dev server and hot reload enabled
+# React initial setup
+Basic setup of react project with dev server and hot reload enabled
 
 #npm install :
 install all the node packages first 
@@ -9,3 +9,6 @@ run the development server with hot reload
 
 #npm run build :
 to build the bundle for deployment
+
+#npm run create-component [componentname]
+to create react component with given name in components folder
