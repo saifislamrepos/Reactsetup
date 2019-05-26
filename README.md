@@ -1,5 +1,5 @@
 # React initial setup
-Basic setup of react project with dev server and hot reload enabled
+Basic setup of react project with dev server and hot reload enabled, create component using node cli
 
 #npm install :
 install all the node packages first 
