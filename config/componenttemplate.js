@@ -1,32 +1,26 @@
 const name = process.argv[2];
 module.exports = {
-    js : 'import Vue from \'vue\'\n'+
-    'export default {\n'+
-    '  name: \''+name+'App\',\n'+
-    '  components: {\n'+
-    '  },\n'+
-    '  data() {\n'+
-    '    return {\n'+
-    '      message: \''+name+'example\'\n'+
+    js : 'import React \,\{Component\} from \'react\' ;\n'+
+    'import '+name+'css from \'\.\/'+name+'\.scss\';\n'+
+    'class '+name+' extends React\.Component {\n'+
+    '    constructor\(props\) \{\n'+
+    '       super(props)\;\n'+
+    '       this\.state = {\n'+
+    '           message : '+name+'\n'+
+    '       }\n'+
     '    }\n'+
-    '  },\n'+
-    '  methods: {\n'+
-    '  \n'+
-    '  },\n'+
-    '  mounted: function () {\n'+
-    '    console.log(\'hello '+name+'\');\n'+
-    '  }\n'+
-    '}\n',
-    vue:'<template>\n'+
-    '  <div class="'+name+'">\n'+
-    '    <p>\n'+
-    '    {{message}}\n'+
-    '    </p>\n'+
-    '  </div>\n'+
-    '</template>\n'+
-    '<script src= \'../'+name+'/'+name+'.js\'></script>\n'+
-    '<!-- Add "scoped" attribute to limit CSS to this component only -->\n'+
-    '<style src = \'../'+name+'/'+name+'.css\'  scoped></style>\n',
-    css:'.'+name+'{\n'
+    '    render() {\n'+
+    '        const message = this\.state\.message\n'+
+    '        return (\n'+
+    '            <div>\n'+
+    '                <div className="class">\n'+
+    '                message : {message}\n'+
+    '                </div>\n'+
+    '            </div>\n'+
+    '        );\n'+
+    '    }\n'+
+    '}\n'+
+    'export default '+name+';\n',
+    scss:'.'+name+'{\n'
         +'}'
 };
