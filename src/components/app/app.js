@@ -5,7 +5,7 @@ import Text from '../text/text.js'
 import appcss from './app.scss';
 class App extends Component{
    state = {
-      config : {name:'saif'}
+      config : {name:''}
    }
    render(){
       return(
