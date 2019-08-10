@@ -5,8 +5,6 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const HotModuleReplacementPlugin = require("webpack-hot-middleware");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('../config/webpack.config.js');
-
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const path = require('path');
 var webpackConfig = merge(baseWebpackConfig, {
     output:{

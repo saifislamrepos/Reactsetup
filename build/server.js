@@ -4,8 +4,13 @@ const config = require('../config/webpack.dev.config.js');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackhotmodulereplacement = require("webpack-hot-middleware");
-var proxyMiddleware = require('http-proxy-middleware')
+var proxyMiddleware = require('http-proxy-middleware');
+const open = require('opn');
+const envvariables = require('../config/enviromentconstants');
+const environment = process.env.NODE_ENV;
+const env = envvariables[environment];
 const app = express();
+const router = require('../routers');
 config.output.publicPath = '/';
 var compiler = webpack(config);
 var devmiddleware = webpackDevMiddleware(compiler, {
@@ -16,10 +21,13 @@ var devmiddleware = webpackDevMiddleware(compiler, {
 	}
 });
 var hotreload = webpackhotmodulereplacement(compiler);
-app.use(devmiddleware);
-app.use(hotreload);
+app.disable('x-powered-by');
+app.use('/', devmiddleware);
+app.use('/', hotreload);
+app.use('/', router);
 
 
-app.listen(3002, function () {
-	console.log('app listening on port 3002!\n');
+app.listen(env.PORT, function () {
+	console.log('app listening on port'+env.PORT+'!\n');
+	open("http://"+env.SERVER+env.PORT)
 });

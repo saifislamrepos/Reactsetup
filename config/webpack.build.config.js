@@ -13,12 +13,17 @@ const path = require('path');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
+
+const envvariables = require('../config/enviromentconstants');
+const environment = process.env.NODE_ENV;
+const env = envvariables[environment];
+
 var webpackConfig = merge(baseWebpackConfig, {
     output: {
         publicPath: outputpath,
         filename: 'assets/js/[name].js',
         chunkFilename: 'assets/js/[name].[contenthash:8].js',
-        path: path.resolve(__dirname, '../dist')
+        path: path.resolve(env.ROOT_DIR, 'dist')
     },
     mode: 'production',
     optimization: {
@@ -46,7 +51,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new cleanWebpackPlugin(['dist'], {
-            root: path.resolve(__dirname, '../'),
+            root: env.ROOT_DIR,
             verbose: true,
             dry: false
         }),
