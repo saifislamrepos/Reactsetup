@@ -14,5 +14,5 @@ app.get('/', function (req, res) {
 app.use('/', router);
 app.listen(env.PORT, function () {
 	console.log('app listening on port'+env.PORT+'!\n');
-	open("http://"+env.SERVER+env.PORT)
+	//open("http://"+env.SERVER+env.PORT)
 });

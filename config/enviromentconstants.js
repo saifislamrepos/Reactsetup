@@ -11,7 +11,7 @@ const envvariables = {
     prod : {
         PORT : 3000,
         SERVER:"localhost:",
-        ROOT_DIR:path.resolve(__dirname),
+        ROOT_DIR:path.resolve(__dirname, '../'),
         DB_PORT:27017,
         DB_SERVER:'localhost:',
         DB:'/userdata'

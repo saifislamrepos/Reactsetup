@@ -1,33 +1,25 @@
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('../config/webpack.config.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const outputpath = "./"
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
-
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const CompressionPlugin = require('compression-webpack-plugin');
-
-const envvariables = require('../config/enviromentconstants');
-const environment = process.env.NODE_ENV;
-const env = envvariables[environment];
-
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 var webpackConfig = merge(baseWebpackConfig, {
     output: {
         publicPath: outputpath,
         filename: 'assets/js/[name].js',
         chunkFilename: 'assets/js/[name].[contenthash:8].js',
-        path: path.resolve(env.ROOT_DIR, 'dist')
+        path: path.resolve(__dirname, '../dist')
     },
     mode: 'production',
     optimization: {
-        minimize: true,
         minimizer: [new UglifyJsPlugin(),new OptimizeCSSAssetsPlugin({})],
         splitChunks: {
             chunks: 'all',
@@ -42,7 +34,7 @@ var webpackConfig = merge(baseWebpackConfig, {
                     name: 'styles',
                     test: /\.s?css$/,
                     chunks: 'all',
-                    minChunks: 1,
+                    minChunks: 100,
                     reuseExistingChunk: true,
                     enforce: true,
                   },
@@ -50,8 +42,8 @@ var webpackConfig = merge(baseWebpackConfig, {
         }
     },
     plugins: [
-        new cleanWebpackPlugin(['dist'], {
-            root: env.ROOT_DIR,
+        new CleanWebpackPlugin( {
+            root: path.resolve(__dirname, '../'),
             verbose: true,
             dry: false
         }),
@@ -67,15 +59,20 @@ var webpackConfig = merge(baseWebpackConfig, {
             },
             chunksSortMode: 'dependency'
         }),
-        new BundleAnalyzerPlugin(),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "assets/css/[name].css"
         }),
+        new BundleAnalyzerPlugin(),
         new CompressionPlugin({
-            test: /\.js(\?.*)?$/i
-          })
+            test: /\.js(\?.*)?$/i,
+            minRatio: 0.7
+        }),
+        new BrotliPlugin({
+            test: /\.js(\?.*)?$/i,
+            minRatio: 0.7
+        })
     ],
     module: {
         rules: [{

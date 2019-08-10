@@ -10,8 +10,7 @@ function resolve(dir) {
 module.exports = {
 	entry: [path.resolve(env.ROOT_DIR, 'src/index.js')],
 	output: {
-		filename: '[name].bundle.js',
-		chunkFilename: '[name].bundle.js',
+		filename: 'bundle.js'
 	},
 	resolve: {
 		extensions: ['.js', '.json','.css'],
@@ -42,10 +41,6 @@ module.exports = {
 					],
 					plugins: [ "dynamic-import-webpack","transform-class-properties","@babel/plugin-proposal-object-rest-spread" ]
 				  }
-			},
-			{
-				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
 				test: /\.styl(us)?$/,
