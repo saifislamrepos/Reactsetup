@@ -60,8 +60,6 @@ var webpackConfig = merge(baseWebpackConfig, {
             chunksSortMode: 'dependency'
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "assets/css/[name].css"
         }),
         new BundleAnalyzerPlugin(),
@@ -80,7 +78,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        publicPath: '../dist/css/assets'
+                        publicPath: '/'
                     },
 
                 },
@@ -88,6 +86,18 @@ var webpackConfig = merge(baseWebpackConfig, {
                 'sass-loader',
        
             ]
+        },{
+            test: /\.(png|jpe?g|gif)$/i,
+            loader: 'file-loader',
+            options: {
+                name: '[name]-[contenthash].[ext]',
+                outputPath: (url, resourcePath, context) => {
+                    let imgpath = path.relative(context, resourcePath).replace("resources", "assets");
+                    imgpath =  imgpath.split('/');
+                    imgpath[imgpath.length-1] = url;
+                    return  imgpath.join('/');
+                  }
+            },
         }]
     }
 });

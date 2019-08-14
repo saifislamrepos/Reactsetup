@@ -10,6 +10,10 @@ router.use('/assets',express.static(path.join(env.ROOT_DIR,'/dist/assets'),{
     immutable : true,
     maxAge    : '1y'
 }));
+router.use('/resources',express.static(path.join(env.ROOT_DIR,'/resources'),{
+    immutable : true,
+    maxAge    : '1y'
+}));
 router.use(function (err, req, res, next) {
 	console.log('error');
 	if (!err.statusCode) err.statusCode = 500; 

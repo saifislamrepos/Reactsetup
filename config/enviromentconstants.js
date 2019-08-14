@@ -1,6 +1,6 @@
 const path = require('path');
 const envvariables = {
-    dev : {
+    development : {
         PORT : 3002,
         SERVER:"localhost:",
         ROOT_DIR:path.resolve(__dirname, '../'),

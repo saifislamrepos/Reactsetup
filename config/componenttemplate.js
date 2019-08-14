@@ -6,17 +6,15 @@ module.exports = {
     '    constructor\(props\) \{\n'+
     '       super(props)\;\n'+
     '       this\.state = {\n'+
-    '           message : '+name+'\n'+
+    '           message : "'+name+'"\n'+
     '       }\n'+
     '    }\n'+
     '    render() {\n'+
     '        const message = this\.state\.message\n'+
     '        return (\n'+
-    '            <div>\n'+
-    '                <div className="class">\n'+
-    '                message : {message}\n'+
-    '                </div>\n'+
-    '            </div>\n'+
+'                <div className="'+name+'">\n'+
+'                message : {message}\n'+
+'                </div>\n'+
     '        );\n'+
     '    }\n'+
     '}\n'+

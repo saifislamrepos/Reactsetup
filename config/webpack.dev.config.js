@@ -38,7 +38,20 @@ var webpackConfig = merge(baseWebpackConfig, {
         },
         {
           test: /\.scss$/,
-          use: ['style-loader', 'css-loader', 'sass-loader']
+          use: [
+            {
+              loader: 'style-loader/url'
+            },
+          {
+            loader: 'file-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }]
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          loader: 'file-loader',
         },
         {
           test: /\.js$/,

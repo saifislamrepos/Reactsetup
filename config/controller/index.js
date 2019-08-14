@@ -1,11 +1,12 @@
 exports.serveGzipped = contentType => (req, res, next) => {
     const acceptedEncodings = req.acceptsEncodings();
     const encoding = {ext:".js.gz",type:"gzip"};
-    if (acceptedEncodings.indexOf('gzip') === -1 || acceptedEncodings.indexOf('br') === -1) {
+    if (acceptedEncodings.indexOf('gzip') === -1 && acceptedEncodings.indexOf('br') === -1) {
         next()
         return
     }
-    if (acceptedEncodings.indexOf('br') >= -1) {
+    
+    if (acceptedEncodings.indexOf('br') > -1) {
         encoding.ext= ".js.br";
         encoding.type = "br";
     }
